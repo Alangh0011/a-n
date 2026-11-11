@@ -1,0 +1,47 @@
+*{ margin:0; padding:0; box-sizing:border-box; }
+html,body{ width:100%; height:100%; overflow:hidden; background:#05030f; }
+body{ font-family: Georgia, 'Times New Roman', serif; }
+canvas{ display:block; touch-action:none; }
+
+/* Portada que también arranca la música */
+#intro{
+  position:fixed; inset:0; z-index:20; cursor:pointer;
+  background:radial-gradient(circle at 50% 42%, #160e2e 0%, #05030f 72%);
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  color:#fff; transition:opacity 1.6s ease; padding:24px;
+}
+#intro.fuera{ opacity:0; pointer-events:none; }
+#intro .pre{ font-size:14px; letter-spacing:6px; text-transform:uppercase; opacity:.65; }
+#intro .pre-1{ font-size:9px; letter-spacing:6px; text-transform:uppercase; opacity:.65; padding:40px;}
+#intro .big{ font-size:40px; font-style:italic; margin:12px 0 22px; text-shadow:0 0 40px rgba(190,170,255,.65); }
+#intro .tap{ font-size:13px; letter-spacing:2px; opacity:.6; animation:pulso 2.4s ease-in-out infinite; }
+@keyframes pulso{ 0%,100%{opacity:.3} 50%{opacity:.85} }
+
+#hint{
+  position:fixed; left:50%; bottom:34px; transform:translateX(-50%);
+  color:rgba(240,240,255,.82); font-size:15px; letter-spacing:.5px;
+  text-align:center; pointer-events:none; z-index:5;
+  text-shadow:0 0 18px rgba(180,160,255,.6);
+  transition:opacity 1.4s ease; opacity:0; padding:0 20px;
+}
+#hint.oculto{ opacity:0 !important; }
+
+.btn{
+  position:fixed; bottom:16px; z-index:6;
+  background:rgba(255,255,255,.08); color:rgba(240,240,255,.9);
+  border:1px solid rgba(200,190,255,.35); border-radius:22px;
+  padding:9px 15px; font-family:Georgia, serif; font-size:13px;
+  cursor:pointer; -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); transition:background .3s;
+}
+.btn:hover{ background:rgba(255,255,255,.16); }
+#btnFoto{ left:16px; }
+#btnMute{ right:16px; }
+#inputFoto{ display:none; }
+
+#yt{ position:fixed; width:1px; height:1px; opacity:0; pointer-events:none; bottom:0; left:0; overflow:hidden; }
+
+@media (max-width:600px){
+  #intro .big{ font-size:30px; }
+  #hint{ font-size:13px; bottom:26px; }
+  .btn{ font-size:12px; padding:8px 13px; }
+}

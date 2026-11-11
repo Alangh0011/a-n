@@ -3,29 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Mi Luna</title>
+<meta name="theme-color" content="#07031a">
+<title>Te morado 💜</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Portada (también arranca la música). Los textos se llenan desde config.js -->
   <div id="intro">
     <div>
-      <div class="pre">para ti</div>
-      <div class="big">mi luna 🌙</div>
+      <div class="pre" id="introPre">para ti</div>
+      <div class="big" id="introBig">te morado 💜</div>
+      <div class="kr" id="introSub">보라해 · I purple you</div>
+      <div class="siete"><span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span></div>
       <div class="tap">toca para entrar</div>
-      <div class="pre-1">Si alguna ves dudas de lo mucho que te quiero, regresa aquí</div>
     </div>
   </div>
-  
-  <div id="hint">Arrastra para girar el universo ✨</div>
-  
+
+  <div id="contador">✦ 0 / 7 estrellas</div>
+  <div id="hint">Arrastra para girar el universo<br>y encuentra las 7 estrellas que brillan ✦</div>
+
+  <!-- Carta que aparece al tocar cada estrella -->
+  <div id="carta">
+    <div class="carta-in">
+      <div class="carta-de">la estrella de</div>
+      <div class="carta-quien" id="cQuien"></div>
+      <div class="carta-cancion" id="cCancion"></div>
+      <p class="carta-msg" id="cMsg"></p>
+      <button class="carta-btn" id="cBtn">seguir explorando ✦</button>
+    </div>
+  </div>
+
+  <!-- Sorpresa final al encontrar las 7 -->
+  <div id="final">
+    <div>
+      <div class="kr" id="fKr"></div>
+      <div class="es" id="fEs"></div>
+      <p class="msg" id="fMsg"></p>
+      <p class="porque" id="fPorque"></p>
+      <div class="firma" id="fFirma"></div>
+      <div class="tap">toca para volver al universo</div>
+    </div>
+  </div>
 
   <button id="btnFoto" class="btn">Elegir foto</button>
-  <button id="btnMute" class="btn">🔊</button>
+  <button id="btnMute" class="btn">♪</button>
   <input type="file" id="inputFoto" accept="image/*">
   <div id="yt"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="config.js"></script>
   <script src="app.js"></script>
-  
 </body>
 </html>

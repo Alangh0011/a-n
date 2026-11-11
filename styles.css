@@ -1,47 +1,120 @@
 *{ margin:0; padding:0; box-sizing:border-box; }
-html,body{ width:100%; height:100%; overflow:hidden; background:#05030f; }
-body{ font-family: Georgia, 'Times New Roman', serif; }
-canvas{ display:block; touch-action:none; }
+html,body{ width:100%; height:100%; overflow:hidden; background:#07031a; }
+body{ font-family: Georgia, 'Times New Roman', serif; color:#fff; -webkit-tap-highlight-color:transparent; }
+canvas{ display:block; touch-action:none; cursor:grab; }
 
-/* Portada que también arranca la música */
+/* ---------- Portada (también arranca la música) ---------- */
 #intro{
-  position:fixed; inset:0; z-index:20; cursor:pointer;
-  background:radial-gradient(circle at 50% 42%, #160e2e 0%, #05030f 72%);
+  position:fixed; inset:0; z-index:30; cursor:pointer;
+  background:radial-gradient(circle at 50% 42%, #2b1356 0%, #120726 45%, #07031a 78%);
   display:flex; align-items:center; justify-content:center; text-align:center;
-  color:#fff; transition:opacity 1.6s ease; padding:24px;
+  transition:opacity 1.6s ease; padding:24px;
 }
 #intro.fuera{ opacity:0; pointer-events:none; }
 #intro .pre{ font-size:14px; letter-spacing:6px; text-transform:uppercase; opacity:.65; }
-#intro .pre-1{ font-size:9px; letter-spacing:6px; text-transform:uppercase; opacity:.65; padding:40px;}
-#intro .big{ font-size:40px; font-style:italic; margin:12px 0 22px; text-shadow:0 0 40px rgba(190,170,255,.65); }
+#intro .big{ font-size:46px; font-style:italic; margin:14px 0 8px; text-shadow:0 0 40px rgba(170,110,255,.85); }
+#intro .kr{ font-size:16px; letter-spacing:3px; opacity:.75; margin-bottom:26px; }
+#intro .siete{ margin-bottom:24px; }
+#intro .siete span{ display:inline-block; margin:0 5px; font-size:13px; color:#cdb2ff; opacity:.25;
+  animation:titila 3.5s ease-in-out infinite; }
 #intro .tap{ font-size:13px; letter-spacing:2px; opacity:.6; animation:pulso 2.4s ease-in-out infinite; }
 @keyframes pulso{ 0%,100%{opacity:.3} 50%{opacity:.85} }
+@keyframes titila{ 0%,100%{opacity:.2; text-shadow:none} 40%{opacity:1; text-shadow:0 0 12px #b78cff} }
+@media (max-width:600px){ #intro .big{ font-size:36px; } }
 
+/* ---------- Textos flotantes ---------- */
 #hint{
-  position:fixed; left:50%; bottom:34px; transform:translateX(-50%);
-  color:rgba(240,240,255,.82); font-size:15px; letter-spacing:.5px;
-  text-align:center; pointer-events:none; z-index:5;
-  text-shadow:0 0 18px rgba(180,160,255,.6);
+  position:fixed; left:50%; bottom:64px; transform:translateX(-50%);
+  color:rgba(240,232,255,.85); font-size:15px; letter-spacing:.5px; line-height:1.5;
+  text-align:center; pointer-events:none; z-index:5; width:max-content; max-width:92vw;
+  text-shadow:0 0 18px rgba(170,110,255,.7);
   transition:opacity 1.4s ease; opacity:0; padding:0 20px;
 }
 #hint.oculto{ opacity:0 !important; }
 
+#contador{
+  position:fixed; top:16px; left:50%; transform:translateX(-50%); z-index:6;
+  font-size:13px; letter-spacing:2px; color:rgba(235,222,255,.9);
+  padding:7px 16px; border-radius:20px; white-space:nowrap;
+  background:rgba(120,70,220,.14); border:1px solid rgba(200,170,255,.3);
+  backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+  opacity:0; transition:opacity 1.2s ease, background .4s; pointer-events:none;
+}
+#contador.listo{ background:rgba(150,80,255,.32); cursor:pointer; pointer-events:auto;
+  box-shadow:0 0 22px rgba(160,100,255,.55); }
+
+/* ---------- Botones ---------- */
 .btn{
   position:fixed; bottom:16px; z-index:6;
-  background:rgba(255,255,255,.08); color:rgba(240,240,255,.9);
-  border:1px solid rgba(200,190,255,.35); border-radius:22px;
+  background:rgba(150,100,255,.12); color:rgba(240,232,255,.92);
+  border:1px solid rgba(200,170,255,.38); border-radius:22px;
   padding:9px 15px; font-family:Georgia, serif; font-size:13px;
-  cursor:pointer; -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); transition:background .3s;
+  cursor:pointer; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); transition:background .3s;
 }
-.btn:hover{ background:rgba(255,255,255,.16); }
+.btn:hover{ background:rgba(150,100,255,.26); }
 #btnFoto{ left:16px; }
 #btnMute{ right:16px; }
 #inputFoto{ display:none; }
 
-#yt{ position:fixed; width:1px; height:1px; opacity:0; pointer-events:none; bottom:0; left:0; overflow:hidden; }
-
-@media (max-width:600px){
-  #intro .big{ font-size:30px; }
-  #hint{ font-size:13px; bottom:26px; }
-  .btn{ font-size:12px; padding:8px 13px; }
+/* ---------- Carta de cada estrella ---------- */
+#carta{
+  position:fixed; inset:0; z-index:25; display:flex; align-items:center; justify-content:center; padding:24px;
+  background:rgba(7,3,26,.45); opacity:0; pointer-events:none; transition:opacity .5s ease;
 }
+#carta.visible{ opacity:1; pointer-events:auto; }
+.carta-in{
+  width:100%; max-width:360px; text-align:center; padding:30px 26px 24px; border-radius:22px;
+  background:linear-gradient(160deg, rgba(64,32,120,.82), rgba(24,10,54,.88));
+  border:1px solid rgba(200,170,255,.42);
+  box-shadow:0 0 60px rgba(140,80,255,.45), inset 0 0 30px rgba(180,140,255,.12);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  transform:translateY(16px) scale(.96); transition:transform .55s cubic-bezier(.2,.8,.2,1);
+}
+#carta.visible .carta-in{ transform:none; }
+.carta-de{ font-size:11px; letter-spacing:4px; text-transform:uppercase; opacity:.6; }
+.carta-quien{ font-size:30px; font-style:italic; margin:8px 0 4px; text-shadow:0 0 22px rgba(180,130,255,.95); }
+.carta-cancion{ font-size:13px; letter-spacing:1px; color:#dcc6ff; opacity:.85; margin-bottom:18px; }
+.carta-msg{ font-size:17px; line-height:1.55; color:#f6eeff; }
+.carta-btn{
+  margin-top:22px; background:rgba(160,110,255,.22); color:#f3ebff; border:1px solid rgba(210,180,255,.5);
+  border-radius:22px; padding:10px 20px; font-family:Georgia, serif; font-size:14px; cursor:pointer;
+}
+.carta-btn:hover{ background:rgba(160,110,255,.4); }
+
+/* ---------- Sorpresa final ---------- */
+#final{
+  position:fixed; inset:0; z-index:26; display:flex; align-items:center; justify-content:center;
+  text-align:center; padding:28px; cursor:pointer;
+  background:radial-gradient(circle at 50% 50%, rgba(62,24,120,.86), rgba(7,3,26,.93) 72%);
+  opacity:0; pointer-events:none; transition:opacity 1.4s ease;
+}
+#final.visible{ opacity:1; pointer-events:auto; }
+#final .kr{ font-size:68px; text-shadow:0 0 50px rgba(170,110,255,1), 0 0 16px rgba(220,190,255,.9); }
+#final .es{ font-size:24px; font-style:italic; margin:4px 0 20px; color:#e6d6ff; }
+#final .msg{ max-width:420px; margin:0 auto; font-size:17px; line-height:1.6; }
+#final .porque{ max-width:380px; margin:16px auto 0; font-size:13px; line-height:1.55; opacity:.7; }
+#final .firma{ margin-top:18px; font-style:italic; color:#d9c2ff; }
+#final .tap{ margin-top:28px; font-size:12px; letter-spacing:2px; opacity:.5; }
+@media (max-width:600px){ #final .kr{ font-size:54px; } }
+
+/* ---------- Estrellas fugaces y corazones ---------- */
+.fugaz{
+  position:fixed; z-index:2; height:2px; width:150px; pointer-events:none; border-radius:2px;
+  background:linear-gradient(90deg, rgba(255,255,255,0), rgba(210,175,255,.85) 70%, #fff);
+  filter:drop-shadow(0 0 6px rgba(190,140,255,.9));
+  animation:fugaz 1.4s ease-out forwards;
+}
+@keyframes fugaz{
+  0%{ transform:translate(0,0) rotate(var(--ang)); opacity:0 }
+  12%{ opacity:1 }
+  100%{ transform:translate(var(--tx),var(--ty)) rotate(var(--ang)); opacity:0 }
+}
+.corazon{ position:fixed; bottom:-40px; z-index:27; pointer-events:none; color:#cfa8ff;
+  text-shadow:0 0 12px rgba(170,110,255,.9); animation:sube linear forwards; }
+@keyframes sube{
+  0%{ transform:translate(0,0) rotate(0); opacity:0 }
+  10%{ opacity:1 }
+  100%{ transform:translate(var(--dx),-115vh) rotate(var(--r)); opacity:0 }
+}
+
+#yt{ position:fixed; width:1px; height:1px; opacity:0; pointer-events:none; bottom:0; left:0; overflow:hidden; }

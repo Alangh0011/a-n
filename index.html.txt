@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Mi Luna</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="intro">
+    <div>
+      <div class="pre">para ti</div>
+      <div class="big">mi luna 🌙</div>
+      <div class="tap">toca para entrar</div>
+      <div class="pre-1">Si alguna ves dudas de lo mucho que te quiero, regresa aquí</div>
+    </div>
+  </div>
+  
+  <div id="hint">Arrastra para girar el universo ✨</div>
+  
+
+  <button id="btnFoto" class="btn">Elegir foto</button>
+  <button id="btnMute" class="btn">🔊</button>
+  <input type="file" id="inputFoto" accept="image/*">
+  <div id="yt"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="app.js"></script>
+  
+</body>
+</html>
